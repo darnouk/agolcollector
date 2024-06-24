@@ -1,3 +1,4 @@
+<!-- cspell:disable -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,20 +26,29 @@
         require([
             "esri/config",
             "esri/Map",
-            "esri/views/MapView"
-        ], (esriConfig, Map, MapView) => {
-
+            "esri/views/MapView",
+            "esri/widgets/Locate"
+        ], (esriConfig, Map, MapView, Locate) => {
+    
             // setting the api key
             esriConfig.apiKey = "AAPK572c05ffa05d46a2aaf199b16ffb4221oE24c7wpfEvr0IwIzITaPNpdCYGeE71pjVNgO0grx1V-RUKdhR87ctV8qxm5rAB_";
-
+    
             const map = new Map({
                 basemap: "satellite"
             });
-
+    
             const view = new MapView({
                 container: "viewDiv", // Reference to the DOM node that will contain the view
-                map: map // References the map object
+                map: map, // References the map object
+                center: [-110.82579, 32.15270], // Longitude and Latitude Boneyard at Davis Monthan Air Force Base in Arizona
+                zoom: 17 // Zoom level
             });
+    
+            const locateBtn = new Locate({
+                view
+            });
+
+            view.ui.add(locateBtn, "top-left");
         });
     </script>
 </head>
